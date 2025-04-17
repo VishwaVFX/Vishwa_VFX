@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishwa FX Artist - Visual Effects Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&family=Chakra+Petch:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #ffffff;
+            --accent-color: #00f2fe;
+            --text-color: #ffffff;
+            --gray-text: #ffffff;
+            --heading-font: 'Inter', sans-serif;
+            --body-font: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            background: var(--primary-color);
+            line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--heading-font);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-family: var(--heading-font);
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-family: var(--heading-font);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .video-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-overlay {
+            display: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .loading-spinner {
+            display: none;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.05em;
+            text-shadow: none;
+        }
+
+        .hero h1 span {
+            display: inline-block;
+            opacity: 1;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero h1::after {
+            display: none;
+        }
+
+        .particle {
+            display: none;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+            opacity: 1;
+            margin-bottom: 3rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .cta-button {
+            font-family: 'Space Grotesk', sans-serif;
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            font-size: 0.95rem;
+            border: none;
+            min-width: 200px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .cta-button::before {
+            display: none;
+        }
+
+        /* Showreel Section */
+        .showreel {
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, #000000 0%, #111111 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showreel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .showreel-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .showreel-header {
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .showreel-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            letter-spacing: 0.05em;
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .showreel-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            text-align: center;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            opacity: 0.9;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .video-wrapper:hover .video-overlay {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .play-button i {
+            color: #000;
+            font-size: 2rem;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background: #fff;
+        }
+
+        .video-title {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .video-description {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* News Section */
+        .news {
+            padding: 8rem 5%;
+            background: #111;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            font-family: var(--heading-font);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 2rem;
+        }
+
+        .news-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .news-content p {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 5%;
+            background: #000;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .project-overlay p {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .view-project {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--accent-color);
+            color: #000;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .view-project:hover {
+            background: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: var(--secondary-color);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+        }
+
+        .contact-info p {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 0 1rem;
+            }
+            
+            .project-card {
+                height: 500px;
+            }
+
+            .showreel {
+                padding: 3rem 5%;
+            }
+            
+            .showreel-content {
+                padding: 0 1rem;
+            }
+            
+            .showreel-header {
+                margin-bottom: 1rem;
+            }
+            
+            .showreel-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .showreel-header p {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+            }
+            
+            .logo a {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card {
+                height: 600px;
+            }
+        }
+
+        /* Add smooth scrolling behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Update section IDs */
+        #home {
+            height: 100vh;
+        }
+
+        #showreel, #projects, #about, #contact {
+            padding-top: 80px; /* Add padding to account for fixed header */
+            margin-top: -80px; /* Offset the padding */
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            background: #000;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            font-family: var(--heading-font);
+            text-transform: uppercase;
+            color: var(--secondary-color);
+        }
+
+        .about-content p {
+            color: var(--text-color);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.5rem;
+            font-family: var(--body-font);
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .skills {
+            margin-top: 3rem;
+        }
+
+        .skills h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-family: var(--heading-font);
+            color: var(--secondary-color);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: var(--body-font);
+            font-weight: 500;
+            letter-spacing: 0.03em;
+        }
+
+        @media (max-width: 768px) {
+            .about {
+                padding: 3rem 1rem;
+            }
+            
+            .about-content h2 {
+                font-size: 2rem;
+            }
+            
+            .about-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 5%;
+            background: #000;
+            position: relative;
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-family: var(--heading-font);
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            letter-spacing: 0.1em;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 3rem;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact-info:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-info p {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 242, 254, 0.1);
+            transform: translateX(10px);
+            border-color: var(--accent-color);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 242, 254, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .contact-item:hover i {
+            background: var(--accent-color);
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .contact-item span {
+            font-family: var(--body-font);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .contact-item:hover span {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .technologies-header h2,
+            .about-text h2,
+            .contact-content h2 {
+                font-size: 2.5rem;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-indicator {
+            margin-top: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">Vishwa FX Artist</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#showreel">Showreel</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="video-container">
+                <video autoplay muted loop playsinline>
+                    <source src="assets/videos/hero-video.mp4" type="video/mp4">
+                </video>
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="video-overlay"></div>
+            <div class="hero-content">
+                <h1>VISHWA VISUAL FX PORTFOLIO</h1>
+                <p>Experience the power of visual effects through our dynamic showreel, showcasing cutting-edge simulations, particle systems, and digital artistry in motion.</p>
+                <a href="#contact" class="cta-button">Contact Us</a>
+            </div>
+        </section>
+
+        <section id="showreel" class="showreel">
+            <div class="showreel-content">
+                <div class="showreel-header">
+                    <h2>Latest Work</h2>
+                    <div class="scroll-indicator">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="video-wrapper">
+                    <video autoplay muted loop playsinline poster="assets/images/showreel-poster.jpg">
+                        <source src="assets/videos/showreel.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <h2 class="section-title">Project</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="assets/images/projects/fire-effects.jpg" alt="Fire Effects">
+                </div>
+                <div class="project-card">
+                    <img src="assets/images/projects/ocean-simulation.jpg" alt="Ocean Simulation">
+                </div>
+                <div class="project-card">
+                    <img src="assets/images/projects/destruction.jpg" alt="Destruction FX">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-content">
+                <h2 class="section-title">About</h2>
+                <p>Experienced FX artist specializing in Dynamic and Realistic effects, Destruction, Explosion, Fluid, Particle simulation, and Magical effects.</p>
+                <p>Proficient problem-solving skills have enabled successful execution across diverse projects such as "Kadaisi Ulaga Por, Arabian Kadhali" demonstrating versatility and expertise in the field. Dedicated to pushing creative boundaries and delivering visually stunning experiences.</p>
+                <div class="skills">
+                    <h3>Software Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Houdini</span>
+                        <span class="skill-tag">Maya</span>
+                        <span class="skill-tag">Nuke</span>
+                        <span class="skill-tag">VEX</span>
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">Premiere Pro</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">Substance Painter</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="contact-content">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <p>Have a project in mind? Let's discuss how we can bring your vision to life.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope-open-text"></i>
+                                <span>vishwa@example.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+1 234 567 890</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>123 Studio Street, City, Country</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contact</h3>
+                <p>Email: vishwa@example.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Studio Street, City, Country</p>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-artstation"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-vimeo"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Vishwa FX Artist. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('.video-container video');
+            const spinner = document.querySelector('.loading-spinner');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const heroTitle = document.querySelector('.hero h1');
+
+            // Set the title as a single word
+            heroTitle.textContent = 'VISHWA VISUAL FX PORTFOLIO';
+            heroTitle.style.letterSpacing = '0.1em';
+
+            video.addEventListener('loadeddata', function() {
+                spinner.style.display = 'none';
+            });
+
+            // Ensure video plays on mobile devices
+            video.play().catch(function(error) {
+                console.log("Video autoplay failed:", error);
+            });
+
+            // Update active state of navigation links on scroll
+            window.addEventListener('scroll', function() {
+                let current = '';
+                const sections = document.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
