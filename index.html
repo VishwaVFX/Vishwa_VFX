@@ -230,22 +230,11 @@
 
         /* Showreel Section */
         .showreel {
-            padding: 15rem 5% 8rem;
+            padding: 8rem 5% 4rem;
             background: #000;
             text-align: center;
             position: relative;
             margin: 0;
-        }
-
-        .showreel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.1) 0%, transparent 70%);
-            pointer-events: none;
         }
 
         .showreel-content {
@@ -256,16 +245,16 @@
         }
 
         .showreel-header {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .showreel-header h2 {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             color: var(--secondary-color);
             letter-spacing: 0.05em;
             text-align: center;
@@ -275,7 +264,7 @@
 
         .showreel-header p {
             color: var(--text-color);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
@@ -658,8 +647,8 @@
 
         /* About Section */
         .about {
-            padding: 15rem 5% 8rem;
-            background: #111;
+            padding: 6rem 5% 4rem;
+            background: rgba(17, 17, 17, 0.8);
             margin: 0;
         }
 
@@ -671,7 +660,7 @@
         .about-content {
             display: flex;
             justify-content: center;
-            margin-top: 8rem;
+            margin-top: 4rem;
         }
 
         .about-text {
@@ -681,7 +670,7 @@
         }
 
         .about-paragraph {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             position: relative;
             padding-left: 2rem;
         }
@@ -698,14 +687,14 @@
 
         .about-text p {
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.6;
             color: var(--text-color);
             margin-bottom: 0;
         }
 
         @media (max-width: 768px) {
             .about {
-                padding: 4rem 5%;
+                padding: 4rem 5% 3rem;
             }
             
             .about-text {
@@ -714,6 +703,7 @@
             
             .about-paragraph {
                 padding-left: 1.5rem;
+                margin-bottom: 1rem;
             }
             
             .about-text p {
@@ -912,9 +902,10 @@
 
         /* Technologies Section Styles */
         .technologies {
-            padding: 15rem 5% 8rem;
+            padding: 8rem 5% 4rem;
             background: #000;
             margin: 0;
+            order: -1; /* Move to top */
         }
 
         .technologies-container {
@@ -925,92 +916,66 @@
         .tech-items {
             display: flex;
             flex-wrap: wrap;
-            gap: 3rem;
+            gap: 2rem;
             justify-content: center;
-            margin-top: 6rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .tech-item {
             background: rgba(255, 255, 255, 0.05);
-            padding: 1.2rem;
-            border-radius: 12px;
+            padding: 1rem;
+            border-radius: 6px;
             color: var(--text-color);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 90px;
-            height: 90px;
+            width: auto;
+            min-width: 100px;
+            height: auto;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .tech-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(0, 242, 254, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .tech-item:hover::before {
-            transform: translateX(100%);
-        }
-
-        .tech-item:hover {
-            background: rgba(0, 242, 254, 0.1);
-            border-color: var(--accent-color);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
-        }
-
         .tech-item i {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
             transition: all 0.3s ease;
         }
 
-        .tech-item:hover i {
-            color: var(--accent-color);
-            transform: scale(1.1);
-        }
-
         .tech-item span {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             transition: all 0.3s ease;
-        }
-
-        .tech-item:hover span {
-            color: var(--accent-color);
+            white-space: normal;
+            padding: 0 0.5rem;
         }
 
         @media (max-width: 768px) {
             .tech-items {
                 gap: 1.5rem;
+                padding: 0 1rem;
             }
             
             .tech-item {
-                width: 80px;
-                height: 80px;
-                padding: 1rem;
+                min-width: 90px;
+                padding: 0.8rem;
             }
             
             .tech-item i {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
             
             .tech-item span {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
         }
 
