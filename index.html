@@ -84,6 +84,7 @@
             display: flex;
             gap: 2.5rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -97,8 +98,17 @@
             font-family: var(--heading-font);
         }
 
-        .nav-links a:hover {
-            color: var(--accent-color);
+        .nav-links .social-icon {
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links .social-icon:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
         }
 
         /* Hero Section */
@@ -840,10 +850,6 @@
             margin-bottom: 1.5rem;
         }
 
-        .contact-item:last-child {
-            margin-bottom: 0;
-        }
-
         .contact-text h3 {
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
@@ -940,12 +946,26 @@
             position: relative;
             overflow: visible;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
         }
 
         .tech-item i {
             font-size: 1.4rem;
             margin-bottom: 0.5rem;
             transition: all 0.3s ease;
+            animation: iconFloat 3s infinite ease-in-out;
+        }
+
+        .tech-item:hover i {
+            color: var(--accent-color);
+            transform: scale(1.2);
         }
 
         .tech-item span {
@@ -959,23 +979,31 @@
             padding: 0 0.5rem;
         }
 
-        @media (max-width: 768px) {
-            .tech-items {
-                gap: 1.5rem;
-                padding: 0 1rem;
+        .tech-item:hover span {
+            color: var(--accent-color);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.1);
             }
-            
-            .tech-item {
-                min-width: 90px;
-                padding: 0.8rem;
+            70% {
+                box-shadow: 0 0 0 10px rgba(0, 242, 254, 0);
             }
-            
-            .tech-item i {
-                font-size: 1.2rem;
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 242, 254, 0);
             }
-            
-            .tech-item span {
-                font-size: 0.65rem;
+        }
+
+        @keyframes iconFloat {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
             }
         }
 
